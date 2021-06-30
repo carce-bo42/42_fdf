@@ -24,4 +24,12 @@ typedef struct	s_points
 	int		xf;
 	int		yf;
 }				t_points;
+
+typedef struct	s_draw
+{
+	int		dx;
+	int		dy;
+	int		inc;
+	int		diff;
+}				t_draw;
 #endif
