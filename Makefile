@@ -21,7 +21,7 @@ RM := rm -f
 	$(CC)  $(CFLAGS) -c $< -I $(INC_DIR)  -o $@
 
 $(NAME): $(LIBFT_DIR)$(LIBFT_NAME) $(MLX_DIR)$(MLX_NAME) $(OBJS)
-	$(CC) -o $(NAME)  $^ -I $(INC_DIR) -framework OPENGL -framework Appkit
+	$(CC) -o $(NAME)  $^ -I $(INC_DIR) -framework OPENGL -framework Appkit -lm
 
 $(LIBFT_DIR)$(LIBFT_NAME): $(LIBFT_DIR)
 	make -C $(LIBFT_DIR)
