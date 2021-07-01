@@ -2,7 +2,9 @@ NAME := fdf
 LIBFT_NAME = libft.a
 MLX_NAME = libmlx.a
 
-SRCS = fdf.c
+SRCS = fdf.c \
+	./srcs/bresenham.c \
+	./srcs/bresenham_utils.c 
 
 OBJS = ${SRCS:.c=.o}
 
@@ -44,4 +46,3 @@ fclean: clean
 re: clean all
 
 .PHONY: all clean fclean re
-
