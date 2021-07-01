@@ -20,7 +20,7 @@ void	plot_line_high(t_points *points, t_data *data)
 	init_utils_high(&utils, points);
 	while (points->yi < points->yf)
 	{
-		if (points->xi >= 1920 || points->yi >= 1080)
+		if (points->xi >= 2160 || points->yi >= 1360)
 			break ;
 		my_mlx_pixel_put(data, points->xi, points->yi, points->color);
 		if (utils.diff > 0)
@@ -54,7 +54,7 @@ void	plot_line_low(t_points *points, t_data *data)
 	init_utils_low(&utils, points);
 	while (points->xi < points->xf)
 	{
-		if (points->xi >= 1920 || points->yi >= 1080)
+		if (points->xi >= 2160 || points->yi >= 1360)
 			break ;
 		my_mlx_pixel_put(data, points->xi, points->yi, points->color);
 		if (utils.diff > 0)
