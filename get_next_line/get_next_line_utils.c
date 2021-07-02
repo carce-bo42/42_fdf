@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-size_t	ft_strlen(char *str)
+size_t	ft_strlenn(char *str)
 {
 	size_t	i;
 
@@ -12,7 +12,7 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_strchr(char *s, int c)
+char	*ft_strchrr(char *s, int c)
 {
 	size_t	len;
 	char	*aux;
@@ -20,7 +20,7 @@ char	*ft_strchr(char *s, int c)
 	if (!s)
 		return (0);
 	aux = (char *)s;
-	len = ft_strlen(s) + 1;
+	len = ft_strlenn(s) + 1;
 	while (len-- > 0)
 	{
 		if (*aux++ == (char)c)
@@ -34,7 +34,7 @@ char	*ft_strdup_n_free(char *src)
 	char	*output_str;
 	int		i;
 
-	output_str = (char *) malloc(sizeof (*src) * (ft_strlen(src) + 1));
+	output_str = (char *) malloc(sizeof (*src) * (ft_strlenn(src) + 1));
 	if (!output_str)
 		return (NULL);
 	i = 0;
@@ -60,7 +60,7 @@ char	*ft_strjoin_n_free(char *s1, char *s2)
 		str = ft_strdup_n_free(s2);
 		return (str);
 	}
-	str = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	str = (char *)malloc(ft_strlenn(s1) + ft_strlenn(s2) + 1);
 	if (!str)
 		return (NULL);
 	aux_s1 = s1;

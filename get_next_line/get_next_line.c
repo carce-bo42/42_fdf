@@ -3,7 +3,7 @@
 /*This function takes the read_line string, splits it in 
  * both line and rest_line, fils lline_out with the line
  * and redefines read_line as the rest.*/
-char	*ft_write_line(ssize_t len_rd, char *rd_ln, char **ln_out)
+static char	*ft_write_line(ssize_t len_rd, char *rd_ln, char **ln_out)
 {
 	char		*rest_ln;
 	ssize_t		len;
@@ -27,20 +27,20 @@ char	*ft_write_line(ssize_t len_rd, char *rd_ln, char **ln_out)
 		return (NULL);
 	}
 	while (rest_len-- > 0)
-		*(rest_ln + rest_len) = *(rd_ln + rest_len + 1 + ft_strlen(*ln_out));
+		*(rest_ln + rest_len) = *(rd_ln + rest_len + 1 + ft_strlenn(*ln_out));
 	free(rd_ln);
 	return (rest_ln);
 }
 
 /*This function reads from the fd until it either ends or reads a
  * \n. Then it passes what's been read to the write_line function.*/
-char	*ft_read_line(int fd, char *read_line)
+static char	*ft_read_line(int fd, char *read_line)
 {
 	char	*buff;
 	ssize_t	read_ret;
 
 	read_ret = BUFFER_SIZE;
-	while (!(ft_strchr(read_line, '\n')) && read_ret == BUFFER_SIZE)
+	while (!(ft_strchrr(read_line, '\n')) && read_ret == BUFFER_SIZE)
 	{
 		buff = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 		if (!buff)
@@ -75,12 +75,12 @@ int	get_next_line(int fd, char **line)
 			return (-1);
 		else
 		{
-			if (!ft_strchr(r_fd[fd], '\n'))
+			if (!ft_strchrr(r_fd[fd], '\n'))
 			{
-				r_fd[fd] = ft_write_line(ft_strlen(r_fd[fd]), r_fd[fd], line);
+				r_fd[fd] = ft_write_line(ft_strlenn(r_fd[fd]), r_fd[fd], line);
 				return (0);
 			}
-			r_fd[fd] = ft_write_line(ft_strlen(r_fd[fd]), r_fd[fd], line);
+			r_fd[fd] = ft_write_line(ft_strlenn(r_fd[fd]), r_fd[fd], line);
 		}
 	}
 	else
