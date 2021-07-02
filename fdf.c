@@ -22,6 +22,7 @@ int	main()
 	c = 100;
 	l = 100;
 
+	// Scale factor determination.
 	if (c >= 45)
 		scale_factor = ((800 - (800/c) - ((800 * 800)/(c * c)) + 2)/c);
 	else if (c >= 20)
@@ -36,6 +37,8 @@ int	main()
 		scale_factor = (100 - (c * c) /10);
 	c = scale_factor * c;
 	l = scale_factor * l;
+
+	// Drawing the edge of the plane.
 	a = l/2;
 	b = c/2;
 	points.xi = (a + b) * cos (M_PI/6) + 1080;
