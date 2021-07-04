@@ -10,7 +10,8 @@ SRCS = fdf.c \
 	./srcs/line_error_control.c \
 	./srcs/error_msg.c \
 	./srcs/get_nbr_and_color.c \
-	./srcs/gradient_coloring.c
+	./srcs/gradient_coloring.c \
+	./srcs/get_map_line.c
 OBJS = ${SRCS:.c=.o}
 
 LIBFT_DIR := ./libft/

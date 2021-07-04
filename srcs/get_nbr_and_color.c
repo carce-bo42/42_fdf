@@ -35,15 +35,18 @@ static char	*get_str_in_lowercase(char **s, int start, size_t len)
 	return (out);
 }
 
-/* This gets pointed towards an hexa number written as
- * 0xFFFFFF or 0xffffff, and returns the vaue in decimal.*/
+/* This gets pointed towards a comma, followed by an hexa 
+ * number written as 0xFFFFFF or 0xffffff, and returns the
+ * vaue in decimal.*/
 int	get_color(char *str)
 {
 	int		color;
 	char	*aux;
 	char	*aux_free;
 	int		power;
-	
+
+	if (*str != ',')
+		return (0);	
 	power = 5;
 	aux = get_str_in_lowercase(&str, 3, 6);
 	aux_free = aux;

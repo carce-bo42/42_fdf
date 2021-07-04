@@ -43,12 +43,14 @@ int	main(int argc, char **argv)
 {
 	t_data	data;
 	t_mlx	mlx;
+	int		fd;
 
 	if (argc != 2)
 		arg_error();
 	error_ctrl(argv[1], &data);
 	start_mlx(&mlx, &data);
-	//draw_image(argv[1], &data);
+	fd = open(argv[1], O_RDONLY);
+	draw_image(fd, &data);
 
 
 	//printf("data->col = %i, data->row = %i\n", data.col, data.row);

@@ -57,6 +57,13 @@ typedef struct s_draw
 	int		clr_i;
 }				t_draw;
 
+typedef struct s_matrix
+{
+	int	*mat_prv[2];
+	int	*mat_now[2];
+	int	size;
+}				t_mat;
+
 t_points	*reverse_points(t_points *points);
 void		plot_line_high(t_points *points, t_data *data);
 void		plot_line_low(t_points *points, t_data *data);
@@ -76,8 +83,17 @@ void		line_length_error(char *str);
 void		init_map_data(t_data *data);
 void		init_color_grad(t_draw *utils, t_points *pnt);
 void		check_map(int fd, char **line, t_data *data);
+void		start_mlx(t_mlx *mlx, t_data *data);
+void		give_scale_factor(t_data *data);
+void		draw_iso(t_points *pnt, t_data *data, int *l, int *c);
+void		draw_image(int fd, t_data *data);
+void		fill_row_matrix(t_mat *mat, char **line, int *row);
+void		rewrite_previous_line(t_mat *mat);
+void		line_to_matrix(int **mat, char **line);
+void		init_row_matrix(int columns, t_mat *row_mats);
 
 char		*ft_atolstr(char *str);
+char		*ft_rgbstr(char *str);
 long		ft_atol(char *str);
 int			get_color(char *str);
 int			get_pixel_color(t_draw *utils, t_points *pnt);
