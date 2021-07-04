@@ -4,8 +4,8 @@
  * -/+ and digit chars,if written in the order:
  *   |isspace(3) * k | sign * 1 | '0' * k | digits * l | 
  *   where k is any positive whole number, and l is between 0 and 10.
- *   If it doesnt respect this format, or if the number has 10 digits
- *   but falls out the INt range, the program raises an error
+ *   If it doesnt respect this format, or if the number is higher tha
+ *   1000 or lower than -1000, the program raises an error
  *   outputting ATOL_ERROR=111111111111 (eleven 1's).*/
 long	ft_atol(char *str)
 {
@@ -29,7 +29,7 @@ long	ft_atol(char *str)
 	if (!ft_isspace3(*str) && *str && !ft_iscoma(*str))
 		return (ATOL_ERROR);
 	out *= sign;
-	if (out > INT_MAX || out < INT_MIN)
+	if (out > MAX_HEIGHT || out < MIN_HEIGHT)
 		return (ATOL_ERROR);
 	return (out);
 }
@@ -116,6 +116,10 @@ void	check_arg(char *str)
 	}
 }
 
+/*This function makes sure the map is in the correct format. This is,
+ * same "number of numbers" on each line, non emptyness on an
+ * in-between-of-file line, possibility of color specification in 
+ * rgb on the format 0xFFFFFF, numbers are ints between -1000 and 1000.*/
 void	check_format(char *str, t_data *data)
 {
 	char	*aux;
@@ -125,27 +129,20 @@ void	check_format(char *str, t_data *data)
 	aux = str;
 	while (*aux)
 	{
-		//printf("|%s|\n", aux);
 		if (ft_atol(aux) == ATOL_ERROR)
-		{
-			//printf("|%s|\n", aux);
-			//printf("Die 2\n");
 			format_error(str);
-		}
 		aux = ft_atolstr(aux);
-		//printf("|%s|\n", aux);
 		if (check_rgb(aux) == -1)
 			rgb_format_error(str);
 		aux = ft_rgbstr(aux);
 		nbrs++;
 	}
+	if (nbrs == 0)
+		line_length_error(str);
 	if (data->col == 0)
 		data->col = nbrs;
 	if (nbrs != data->col)
-	{
-		//printf("Die 3\n");
-		format_error(str);
-	}
+		line_length_error(str);
 }
 
 void	line_error_control(char **line, t_data *data)

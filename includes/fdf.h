@@ -10,12 +10,13 @@
 # include <math.h>
 # include <sys/errno.h>
 # include <string.h>
-# include <limits.h>
+# define MAX_HEIGHT 1000
+# define MIN_HEIGHT -1000
 # define ATOL_ERROR 11111111111
 # define ANSI_COLOR_GREEN "\033[0;32m"
 # define ANSI_UNSET_GREEN "\033[0m"
 
-typedef struct	s_data
+typedef struct s_data
 {
 	void	*img;
 	char	*addr;
@@ -26,7 +27,7 @@ typedef struct	s_data
 	int		row;
 }				t_data;
 
-typedef struct	s_points
+typedef struct s_points
 {
 	int		xi;
 	int		yi;
@@ -35,7 +36,7 @@ typedef struct	s_points
 	int		color;
 }				t_points;
 
-typedef struct	s_draw
+typedef struct s_draw
 {
 	int		dx;
 	int		dy;
@@ -55,12 +56,13 @@ void		check_format(char *str, t_data *data);
 void		check_arg(char *str);
 void		arg_error(void);
 void		file_error(void);
-void		format_error(char  *str);
+void		format_error(char *str);
 void		rgb_format_error(char *str);
-void		error_msg(void);
+void		line_length_error(char *str);
 void		init_map_data(t_data *data);
 void		check_map(int fd, char **line, t_data *data);
 
 char		*ft_atolstr(char *str);
 long		ft_atol(char *str);
+int			get_color(char *str);
 #endif

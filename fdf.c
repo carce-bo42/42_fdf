@@ -18,7 +18,7 @@ void	check_map(int fd, char **line, t_data *data)
 		gnl_ret = get_next_line(fd, line);
 		if (gnl_ret == -1)
 			break ;
-		if (gnl_ret == 0 && **line == '\0')
+		if (gnl_ret == 0 && **line == '\0' && rows != 0)
 		{
 			free(*line);
 			break ;
@@ -28,6 +28,7 @@ void	check_map(int fd, char **line, t_data *data)
 		if (gnl_ret == 0)
 			break ;
 	}
+	printf("rows = %i\n", rows);
 	if (gnl_ret == -1)
 		file_error();
 	data->row = rows;
@@ -41,7 +42,7 @@ void	error_ctrl(char *file, t_data *data)
 	init_map_data(data);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		error_msg();
+		file_error();
 	check_map(fd, &line, data);
 }
 

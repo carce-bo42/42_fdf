@@ -10,30 +10,29 @@ void	arg_error(void)
 
 void	file_error(void)
 {
-	ft_putstr_fd("./fdf : Error reading the map ", 2);
+	ft_putstr_fd("./fdf : Error reading the map\n", 2);
 	exit(0);
 }
 
 void	format_error(char *str)
 {
 	free(str);
-	ft_putstr_fd("./fdf : Error in map format", 2);
+	ft_putstr_fd("./fdf : Error in map format\n", 2);
 	exit(0);
 }
 
 void	rgb_format_error(char *str)
 {
 	free(str);
-	ft_putstr_fd("./fdf : colors (if specified) have to be like: 0xFFFFFF", 2);
+	ft_putstr_fd("./fdf : colors (if specified) ", 2);
+	ft_putstr_fd("have to be like: 0xFFFFFFi\n", 2);
 	exit(0);
 }
 
-void	error_msg(void)
+void	line_length_error(char *str)
 {
-	char	*str;
-
-	str = strerror(errno);
-	write(2, str, ft_strlen(str));
-	write(2, "\n", 1);
+	free(str);
+	ft_putstr_fd("./fdf : error in line length. ", 2);
+	ft_putstr_fd("Make sure the map is recangular\n", 2);
 	exit(0);
 }

@@ -7,7 +7,8 @@ SRCS = fdf.c \
 	./srcs/bresenham.c \
 	./srcs/bresenham_utils.c \
 	./srcs/line_error_control.c \
-	./srcs/error_msg.c
+	./srcs/error_msg.c \
+	./srcs/get_nbr_and_color.c
 OBJS = ${SRCS:.c=.o}
 
 LIBFT_DIR := ./libft/
