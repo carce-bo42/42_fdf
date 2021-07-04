@@ -25,7 +25,7 @@ void	rgb_format_error(char *str)
 {
 	free(str);
 	ft_putstr_fd("./fdf : colors (if specified) ", 2);
-	ft_putstr_fd("have to be like: 0xFFFFFFi\n", 2);
+	ft_putstr_fd("have to be like: 0xFFFFFF\n", 2);
 	exit(0);
 }
 

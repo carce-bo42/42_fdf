@@ -11,6 +11,7 @@ void	init_utils_high(t_draw *utils, t_points *points)
 		utils->dx = -1 * utils->dx;
 	}
 	utils->diff = (2 * utils->dx) - utils->dy;
+	init_color_grad(utils, points);
 }
 
 void	plot_line_high(t_points *points, t_data *data)
@@ -20,9 +21,11 @@ void	plot_line_high(t_points *points, t_data *data)
 	init_utils_high(&utils, points);
 	while (points->yi < points->yf)
 	{
-		if (points->xi >= 2160 || points->yi >= 1360)
-			break ;
-		my_mlx_pixel_put(data, points->xi, points->yi, points->color);
+		if (points->xi < 2160 && points->yi < 1360)
+		{
+			points->clr_c = get_pixel_color(&utils, points);
+			my_mlx_pixel_put(data, points->xi, points->yi, points->clr_c);
+		}
 		if (utils.diff > 0)
 		{
 			points->xi += utils.inc;
@@ -45,6 +48,7 @@ void	init_utils_low(t_draw *utils, t_points *points)
 		utils->dy = -1 * utils->dy;
 	}
 	utils->diff = (2 * utils->dy) - utils->dx;
+	init_color_grad(utils, points);
 }
 
 void	plot_line_low(t_points *points, t_data *data)
@@ -55,8 +59,10 @@ void	plot_line_low(t_points *points, t_data *data)
 	while (points->xi < points->xf)
 	{
 		if (points->xi >= 2160 || points->yi >= 1360)
-			break ;
-		my_mlx_pixel_put(data, points->xi, points->yi, points->color);
+		{
+			points->clr_c = get_pixel_color(&utils, points);
+			my_mlx_pixel_put(data, points->xi, points->yi, points->clr_c);
+		}
 		if (utils.diff > 0)
 		{
 			points->yi += utils.inc;

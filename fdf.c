@@ -1,58 +1,57 @@
 #include "fdf.h"
 
-void	init_map_data(t_data *data)
+void	start_mlx(t_mlx *mlx, t_data *data)
 {
-	data->col = 0;
-	data->row = 0;
+	mlx->mlx = mlx_init();
+	mlx->mlx_win = mlx_new_window(mlx, 2160, 1360, "FdF carce-bo");
+	data->img = mlx_new_image(mlx, 2160, 1360);
+	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
+			&data->line_length, &data->endian);
 }
 
-void	check_map(int fd, char **line, t_data *data) 
+void	give_scale_factor(t_data *data)
 {
-	int	rows;
-	int	gnl_ret;
+	double	c;
 
-	gnl_ret = 1;
-	rows = 0;
-	while (1)
-	{
-		gnl_ret = get_next_line(fd, line);
-		if (gnl_ret == -1)
-			break ;
-		if (gnl_ret == 0 && **line == '\0' && rows != 0)
-		{
-			free(*line);
-			break ;
-		}
-		line_error_control(line, data);
-		rows++;
-		if (gnl_ret == 0)
-			break ;
-	}
-	printf("rows = %i\n", rows);
-	if (gnl_ret == -1)
-		file_error();
-	data->row = rows;
+	c = fmax(data->col, data->row);
+	if (c >= 300)
+		data->s_fct = 0.333;
+	if (c >= 45)
+		data->s_fct = ((300 - (300/c) - ((300 * 300)/(c * c)) + 2)/c);
+	else if (c >= 20)
+		data->s_fct = (15 - (c*c)/500);
+	else if (c >= 10)
+		data->s_fct = (25 - (c*c)/150);
+	else if (c >= 7)
+		data->s_fct = (50 - (c*c)/100);
+	else if (c >= 5)
+		data->s_fct = (60 - (c * c)/100);
+	else
+		data->s_fct = (100 - (c * c) /10);
 }
 
-void	error_ctrl(char *file, t_data *data)
+void	draw_iso(t_points *pnt, t_data *data, int *lin, int *col)
 {
-	int		fd;
-	char	*line;
-
-	init_map_data(data);
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		file_error();
-	check_map(fd, &line, data);
+	pnt->xi = data->s_fct * ((*lin + *col) * cos (M_PI/6)) + 1080;
+	pnt->yi = data->s_fct * (pnt->zi + (*col - *lin) * sin(M_PI/6)) + 680;
+	pnt->xf = data->s_fct * ((*lin + *col) * cos (M_PI/6)) + 1080;
+	pnt->yf = data->s_fct * (pnt->zf + (*col - *lin) * sin(M_PI/6)) + 680;
+	draw_line(pnt, data);
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	t_mlx	mlx;
 
 	if (argc != 2)
 		arg_error();
 	error_ctrl(argv[1], &data);
+	start_mlx(&mlx, &data);
+	//draw_image(argv[1], &data);
+
+
+	//printf("data->col = %i, data->row = %i\n", data.col, data.row);
 	//system("leaks fdf");
 	return (0);
 }

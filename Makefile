@@ -6,9 +6,11 @@ MLX_NAME = libmlx.a
 SRCS = fdf.c \
 	./srcs/bresenham.c \
 	./srcs/bresenham_utils.c \
+	./srcs/map_error_ctrl.c \
 	./srcs/line_error_control.c \
 	./srcs/error_msg.c \
-	./srcs/get_nbr_and_color.c
+	./srcs/get_nbr_and_color.c \
+	./srcs/gradient_coloring.c
 OBJS = ${SRCS:.c=.o}
 
 LIBFT_DIR := ./libft/

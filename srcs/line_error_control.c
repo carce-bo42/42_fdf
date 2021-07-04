@@ -108,10 +108,7 @@ void	check_arg(char *str)
 	{
 		if (!ft_ishexa(*aux) && !ft_isspace3(*aux)
 			&& !ft_isign(*aux) && !ft_iscoma(*aux) && *aux != 'x')
-		{
-			//printf("*aux = |%c|\n", *aux);
 			format_error(str);
-		}
 		aux++;
 	}
 }
