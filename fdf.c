@@ -30,15 +30,6 @@ void	give_scale_factor(t_data *data)
 		data->s_fct = (100 - (c * c) /10);
 }
 
-void	draw_iso(t_points *pnt, t_data *data, int *lin, int *col)
-{
-	pnt->xi = data->s_fct * ((*lin + *col) * cos (M_PI/6)) + 1080;
-	pnt->yi = data->s_fct * (pnt->zi + (*col - *lin) * sin(M_PI/6)) + 680;
-	pnt->xf = data->s_fct * ((*lin + *col) * cos (M_PI/6)) + 1080;
-	pnt->yf = data->s_fct * (pnt->zf + (*col - *lin) * sin(M_PI/6)) + 680;
-	draw_line(pnt, data);
-}
-
 int	main(int argc, char **argv)
 {
 	t_data	data;

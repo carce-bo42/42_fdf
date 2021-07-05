@@ -80,11 +80,15 @@ void	draw_image(int fd, t_data *data)
 
 	row = 0;
 	init_row_matrix(data->col, &row_mats);
+	give_scale_factor(data);
 	while (row < data->row)
 	{
 		get_next_line(fd, &line);
 		fill_row_matrix(&row_mats, &line, &row);
-		//print_matrix(&row_mats);
+		if (row == 0)
+			draw_right_line(row_mats.mat_now, data);
+		else
+			draw_rightop_line(&row_mats, data);
 		row++;
 	}
 }

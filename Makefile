@@ -11,7 +11,8 @@ SRCS = fdf.c \
 	./srcs/error_msg.c \
 	./srcs/get_nbr_and_color.c \
 	./srcs/gradient_coloring.c \
-	./srcs/get_map_line.c
+	./srcs/get_map_line.c \
+	./srcs/drawer.c
 OBJS = ${SRCS:.c=.o}
 
 LIBFT_DIR := ./libft/
