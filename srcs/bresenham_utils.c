@@ -84,5 +84,8 @@ t_points	*reverse_points(t_points *points)
 	aux = points->yf;
 	points->yf = points->yi;
 	points->yi = aux;
+	aux = points->clr_c;
+	points->clr_c = points->clr_f;
+	points->clr_f = aux;
 	return (points);
 }

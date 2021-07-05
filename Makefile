@@ -48,6 +48,7 @@ clean:
 	make -C $(LIBFT_DIR) clean
 	make -C $(MLX_DIR) clean
 	make -C $(GNL_DIR) clean
+	$(RM) ./tags
 	$(RM) $(OBJS)
 
 fclean: clean
@@ -56,5 +57,8 @@ fclean: clean
 	$(RM) $(NAME)
 
 re: clean all
+
+tag: 
+	ctags ./srcs/*.c ./fdf.c
 
 .PHONY: all clean fclean re

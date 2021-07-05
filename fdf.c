@@ -16,8 +16,10 @@ void	give_scale_factor(t_data *data)
 	c = fmax(data->col, data->row);
 	if (c >= 300)
 		data->s_fct = 0.333;
+	if (c >= 100)
+		data->s_fct = 8;
 	if (c >= 45)
-		data->s_fct = ((300 - (300/c) - ((300 * 300)/(c * c)) + 2)/c);
+		data->s_fct = 2 * ((300 - (300/c) - ((300 * 300)/(c * c)) + 2)/c);
 	else if (c >= 20)
 		data->s_fct = (15 - (c*c)/500);
 	else if (c >= 10)
@@ -29,6 +31,24 @@ void	give_scale_factor(t_data *data)
 	else
 		data->s_fct = (100 - (c * c) /10);
 }
+
+int	key_hook(int keycode, t_mlx *mlx)
+{
+	if (keycode == 53)
+	{
+		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+		exit(0);
+	}
+	return (0);
+}
+
+int	destructor(t_mlx *mlx)
+{
+	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
+	exit(0);
+	return (0);
+}
+
 
 int	main(int argc, char **argv)
 {
@@ -43,6 +63,8 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	draw_image(fd, &data);
 	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, data.img, 0, 0);
+	mlx_key_hook(mlx.mlx_win, key_hook, &mlx);
+	mlx_hook(mlx.mlx_win, 17, 0, &destructor, &mlx);
 	//system("leaks fdf");
 	mlx_loop(mlx.mlx);
 	//printf("data->col = %i, data->row = %i\n", data.col, data.row);
