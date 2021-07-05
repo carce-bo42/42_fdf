@@ -7,7 +7,7 @@ void	draw_right_line(int	*mat[2], t_data *data)
 	int			row;
 
 	col = 0;
-	row = 0;
+	row = data->row - 1;
 	while (col < data->col - 1)
 	{
 		pnt.zi = mat[0][col];
@@ -19,30 +19,29 @@ void	draw_right_line(int	*mat[2], t_data *data)
 	}
 }
 
-void	draw_rightop_line(t_mat *mat, t_data *data)
+void	draw_rightop_line(t_mat *mat, t_data *data, int *row)
 {
 	t_points	pnt;
 	int			col;
-	static int	row;
 
 	col = 0;
-	row = 1;
 	while (col < data->col)
 	{
 		pnt.zi = mat->mat_now[0][col];
 		pnt.zf = mat->mat_prv[0][col];
 		pnt.clr_c = mat->mat_now[1][col];
 		pnt.clr_f = mat->mat_prv[1][col];
-		draw_iso_top(&pnt, data, &row, &col);
+		draw_iso_top(&pnt, data, row, &col);
 		if (col < data->col - 1)
 		{
+			pnt.zi = mat->mat_now[0][col];
 			pnt.zf = mat->mat_now[0][col + 1];
+			pnt.clr_c = mat->mat_now[1][col];
 			pnt.clr_f = mat->mat_now[1][col + 1];
-			draw_iso_right(&pnt, data, &row, &col);
+			draw_iso_right(&pnt, data, row, &col);
 		}
 		col++;
 	}
-	row++;
 }
 
 /* Function that recieves the row and columns (from the map) and
@@ -61,9 +60,9 @@ void	draw_iso_right(t_points *pnt, t_data *data, int *row, int *col)
 	row_cent = *row - (data->row / 2);
 	col_cent = *col - (data->col / 2);
 	pnt->xi = data->s_fct * ((row_cent + col_cent) * cos (M_PI/6)) + 1080;
-	pnt->yi = data->s_fct * (pnt->zi + (col_cent - row_cent) * sin(M_PI/6)) + 680;
+	pnt->yi = data->s_fct * (-pnt->zi + (col_cent - row_cent) * sin(M_PI/6)) + 680;
 	pnt->xf = data->s_fct * ((row_cent + col_cent + 1) * cos (M_PI/6)) + 1080;
-	pnt->yf = data->s_fct * (pnt->zf + (col_cent + 1 - row_cent) * sin(M_PI/6)) + 680;
+	pnt->yf = data->s_fct * (-pnt->zf + (col_cent + 1 - row_cent) * sin(M_PI/6)) + 680;
 	draw_line(pnt, data);
 }
 
@@ -77,8 +76,30 @@ void	draw_iso_top(t_points *pnt, t_data *data, int *row, int *col)
 	row_cent = *row - (data->row / 2);
 	col_cent = *col - (data->col / 2);
 	pnt->xi = data->s_fct * ((row_cent + col_cent) * cos (M_PI/6)) + 1080;
-	pnt->yi = data->s_fct * (pnt->zi + (col_cent - row_cent) * sin(M_PI/6)) + 680;
+	pnt->yi = data->s_fct * (-pnt->zi + (col_cent - row_cent) * sin(M_PI/6)) + 680;
 	pnt->xf = data->s_fct * ((row_cent + col_cent + 1) * cos (M_PI/6)) + 1080;
-	pnt->yf = data->s_fct * (pnt->zf + (col_cent - row_cent - 1) * sin(M_PI/6)) + 680;
+	pnt->yf = data->s_fct * (-pnt->zf + (col_cent - row_cent - 1) * sin(M_PI/6)) + 680;
 	draw_line(pnt, data);
+}
+
+void	draw_image(int fd, t_data *data)
+{
+	int		row;
+	char	*line;
+	t_mat	row_mats;
+
+	row = data->row - 1;
+	init_row_matrix(data->col, &row_mats);
+	give_scale_factor(data);
+	while (row >= 0)
+	{
+		get_next_line(fd, &line);
+		fill_row_matrix(&row_mats, &line, &row, &data->row);
+		if (row == data->row - 1)
+			draw_right_line(row_mats.mat_now, data);
+		else
+			draw_rightop_line(&row_mats, data, &row);
+		row--;
+	}
+	free_matrix(&row_mats, row);
 }

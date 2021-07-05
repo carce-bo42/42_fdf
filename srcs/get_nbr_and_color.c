@@ -28,7 +28,7 @@ static char	*get_str_in_lowercase(char **s, int start, size_t len)
 	char	*out;
 	char	*aux;
 
-	aux = ft_substr(*s, start, len);
+	aux = ft_substr(*s, start, len + 1);
 	out = aux;
 	while (*aux)
 		ft_tolower(*aux++);
@@ -46,13 +46,15 @@ int	get_color(char *str)
 	int		power;
 
 	if (*str != ',')
-		return (0);	
+		return (0x00FFFFFF);
 	power = 5;
 	aux = get_str_in_lowercase(&str, 3, 6);
+	printf("%s\n", aux);
 	aux_free = aux;
 	color = 0;
 	while (*aux)
 		color = color + get_idx("0123456789abcdef", *aux++) * pow(16, power--);
 	free(aux_free);
+	//printf("%x\n", color);
 	return (color);
 }

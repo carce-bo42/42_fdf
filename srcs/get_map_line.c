@@ -9,6 +9,17 @@ void	init_row_matrix(int columns, t_mat *row_mats)
 	row_mats->size = columns;
 }
 
+void	free_matrix(t_mat *mat, int row)
+{
+	free(mat->mat_now[0]);
+	free(mat->mat_now[1]);
+	if (row != 1)
+	{
+		free(mat->mat_prv[0]);
+		free(mat->mat_prv[1]);
+	}
+}
+
 void	line_to_matrix(int **mat, char **line)
 {
 	char	*aux;
@@ -40,12 +51,12 @@ void	rewrite_previous_line(t_mat *mat)
 	}
 }
 
-void	fill_row_matrix(t_mat *mat, char **line, int *row)
+void	fill_row_matrix(t_mat *mat, char **line, int *row, int *true_row)
 {
 	char	*aux;
 
 	aux = *line;
-	if (*row == 0)
+	if (*row == *true_row)
 		line_to_matrix(mat->mat_now, line);
 	else
 	{
@@ -71,24 +82,3 @@ void	print_matrix(t_mat *mat)
 		i++;
 	}
 }*/
-
-void	draw_image(int fd, t_data *data)
-{
-	int		row;
-	char	*line;
-	t_mat	row_mats;
-
-	row = 0;
-	init_row_matrix(data->col, &row_mats);
-	give_scale_factor(data);
-	while (row < data->row)
-	{
-		get_next_line(fd, &line);
-		fill_row_matrix(&row_mats, &line, &row);
-		if (row == 0)
-			draw_right_line(row_mats.mat_now, data);
-		else
-			draw_rightop_line(&row_mats, data);
-		row++;
-	}
-}

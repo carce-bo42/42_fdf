@@ -3,7 +3,11 @@
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
 	char	*dst;
+	//static int		i = 0;
 
+	//printf("im putting pixels nigga %i\n", i++);
+	//printf("y: %i, x: %i, color: %i \n", y, x, color);
+	//printf("%p\n", data->addr);
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }

@@ -3,8 +3,8 @@
 void	start_mlx(t_mlx *mlx, t_data *data)
 {
 	mlx->mlx = mlx_init();
-	mlx->mlx_win = mlx_new_window(mlx, 2160, 1360, "FdF carce-bo");
-	data->img = mlx_new_image(mlx, 2160, 1360);
+	mlx->mlx_win = mlx_new_window(mlx->mlx, 2160, 1360, "FdF carce-bo");
+	data->img = mlx_new_image(mlx->mlx, 2160, 1360);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, 
 			&data->line_length, &data->endian);
 }
@@ -42,8 +42,9 @@ int	main(int argc, char **argv)
 	start_mlx(&mlx, &data);
 	fd = open(argv[1], O_RDONLY);
 	draw_image(fd, &data);
-
-
+	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, data.img, 0, 0);
+	//system("leaks fdf");
+	mlx_loop(mlx.mlx);
 	//printf("data->col = %i, data->row = %i\n", data.col, data.row);
 	//system("leaks fdf");
 	return (0);

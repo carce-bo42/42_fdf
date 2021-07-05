@@ -40,6 +40,6 @@ int get_pixel_color(t_draw *utils, t_points *pnt)
         pctg = percent(utils->y_i, pnt->yf, pnt->yi);
     red = get_light((utils->clr_i >> 16) & 0xFF, (pnt->clr_f >> 16) & 0xFF, pctg);
     green = get_light((utils->clr_i >> 8) & 0xFF, (pnt->clr_f >> 8) & 0xFF, pctg);
-    blue = get_light(utils->clr_i & 0xFF, pnt->clr_f & 0xFF, pctg);
+    blue = get_light(utils->clr_i, pnt->clr_f, pctg);
     return ((red << 16) | (green << 8) | blue);
 }

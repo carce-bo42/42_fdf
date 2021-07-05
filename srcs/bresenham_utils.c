@@ -58,7 +58,7 @@ void	plot_line_low(t_points *points, t_data *data)
 	init_utils_low(&utils, points);
 	while (points->xi < points->xf)
 	{
-		if (points->xi >= 2160 || points->yi >= 1360)
+		if (points->xi < 2160 && points->yi < 1360)
 		{
 			points->clr_c = get_pixel_color(&utils, points);
 			my_mlx_pixel_put(data, points->xi, points->yi, points->clr_c);
