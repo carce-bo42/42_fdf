@@ -14,7 +14,7 @@ static int	get_idx(const char *base, char a)
 	while (base[idx])
 	{
 		if (base[idx] == a)
-		   out = idx;
+			out = idx;
 		idx++;
 	}
 	return (out);
@@ -32,7 +32,7 @@ static char	*get_str_in_lowercase(char **s, int start, size_t len)
 	out = aux;
 	while (*aux)
 	{
-		*aux =ft_tolower(*aux);
+		*aux = ft_tolower(*aux);
 		aux++;
 	}
 	return (out);
@@ -55,7 +55,8 @@ int	get_color(char *str)
 	aux_free = aux;
 	color = 0;
 	while (*aux)
-		color = color + (int)(get_idx("0123456789abcdef", *aux++) * pow(16, power--));
+		color = color
+			+ (int)(get_idx("0123456789abcdef", *aux++) * pow(16, power--));
 	free(aux_free);
 	return (color);
 }

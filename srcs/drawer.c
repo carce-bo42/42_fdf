@@ -59,10 +59,14 @@ void	draw_iso_right(t_points *pnt, t_data *data, int *row, int *col)
 
 	row_cent = *row - (data->row / 2);
 	col_cent = *col - (data->col / 2);
-	pnt->xi = (int)(data->s_fct * ((row_cent + col_cent) * cos (M_PI/6)) + 1080);
-	pnt->yi =(int)(data->s_fct * (-pnt->zi + (col_cent - row_cent) * sin(M_PI/6)) + 680);
-	pnt->xf = (int)(data->s_fct * ((row_cent + col_cent + 1) * cos (M_PI/6)) + 1080);
-	pnt->yf = (int)(data->s_fct * (-pnt->zf + (col_cent + 1 - row_cent) * sin(M_PI/6)) + 680);
+	pnt->xi = (int)(data->s_fct
+			* ((row_cent + col_cent) * cos (M_PI / 6)) + 1080);
+	pnt->yi = (int)(data->s_fct
+			* (-pnt->zi + (col_cent - row_cent) * sin (M_PI / 6)) + 680);
+	pnt->xf = (int)(data->s_fct
+			* ((row_cent + col_cent + 1) * cos (M_PI / 6)) + 1080);
+	pnt->yf = (int)(data->s_fct
+			* (-pnt->zf + (col_cent + 1 - row_cent) * sin (M_PI / 6)) + 680);
 	draw_line(pnt, data);
 }
 
@@ -75,10 +79,14 @@ void	draw_iso_top(t_points *pnt, t_data *data, int *row, int *col)
 
 	row_cent = *row - (data->row / 2);
 	col_cent = *col - (data->col / 2);
-	pnt->xi = (int)(data->s_fct * ((row_cent + col_cent) * cos (M_PI/6)) + 1080);
-	pnt->yi = (int)(data->s_fct * (-pnt->zi + (col_cent - row_cent) * sin(M_PI/6)) + 680);
-	pnt->xf = (int)(data->s_fct * ((row_cent + col_cent + 1) * cos (M_PI/6)) + 1080);
-	pnt->yf = (int)(data->s_fct * (-pnt->zf + (col_cent - row_cent - 1) * sin(M_PI/6)) + 680);
+	pnt->xi = (int)(data->s_fct
+			* ((row_cent + col_cent) * cos (M_PI / 6)) + 1080);
+	pnt->yi = (int)(data->s_fct
+			* (-pnt->zi + (col_cent - row_cent) * sin(M_PI / 6)) + 680);
+	pnt->xf = (int)(data->s_fct
+			* ((row_cent + col_cent + 1) * cos (M_PI / 6)) + 1080);
+	pnt->yf = (int)(data->s_fct
+			* (-pnt->zf + (col_cent - row_cent - 1) * sin(M_PI / 6)) + 680);
 	draw_line(pnt, data);
 }
 
@@ -93,7 +101,6 @@ void	draw_image(int fd, t_data *data)
 	give_scale_factor(data);
 	while (row >= 0)
 	{
-		//printf("%i\n", row);
 		get_next_line(fd, &line);
 		fill_row_matrix(&row_mats, &line, &row, &data->row);
 		if (row == data->row - 1)
