@@ -3,23 +3,27 @@ LIBFT_NAME = libft.a
 GNL_NAME = gnl.a
 MLX_NAME = libmlx.a
 
-SRCS = fdf.c \
-	./srcs/bresenham.c \
-	./srcs/bresenham_utils.c \
-	./srcs/map_error_ctrl.c \
-	./srcs/line_error_control.c \
-	./srcs/error_msg.c \
-	./srcs/get_nbr_and_color.c \
-	./srcs/gradient_coloring.c \
-	./srcs/get_map_line.c \
-	./srcs/drawer.c
-OBJS = ${SRCS:.c=.o}
+FILES = main \
+	bresenham \
+	bresenham_utils \
+	map_error_ctrl \
+	parser \
+	parser_utils \
+	error_msg \
+	get_nbr_and_color \
+	gradient_coloring \
+	get_map_line \
+	drawer
 
+SRCS_DIR = ./srcs/
 LIBFT_DIR := ./libft/
 GNL_DIR := ./get_next_line/
 INC_DIR := ./includes/
 EXE_DIR = ./
 MLX_DIR = ./mlx/
+
+SRCS = $(addsuffix .c, $(addprefix $(SRCS_DIR), $(FILES)))
+OBJS = ${SRCS:.c=.o}
 
 CC := cc
 GCC := gcc

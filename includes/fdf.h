@@ -10,8 +10,8 @@
 # include <math.h>
 # include <sys/errno.h>
 # include <string.h>
-# define MAX_HEIGHT 500
-# define MIN_HEIGHT -500
+# define MAX_HEIGHT 600
+# define MIN_HEIGHT -600
 # define ATOL_ERROR 11111111111
 # define ANSI_COLOR_GREEN "\033[0;32m"
 # define ANSI_UNSET_GREEN "\033[0m"
@@ -96,10 +96,10 @@ void		line_to_matrix(int **mat, char **line);
 void		init_row_matrix(int columns, t_mat *row_mats);
 void		free_matrix(t_mat *mat, int row);
 
-
 char		*ft_atolstr(char *str);
 char		*ft_rgbstr(char *str);
 long		ft_atol(char *str);
 int			get_color(char *str);
 int			get_pixel_color(t_draw *utils, t_points *pnt);
+int			check_rgb(char *str);
 #endif
