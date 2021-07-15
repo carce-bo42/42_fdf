@@ -34,7 +34,7 @@ void	translate_x(t_mlx *mlx, int keycode)
 		less = 0;
 	if (keycode == RIGHT_ARROW && more == 1)
 		mlx->data->trans_x += displacement;
-	else (keycode == LLEFT_ARROW && less == 1)
+	if (keycode == LEFT_ARROW && less == 1)
 		mlx->data->trans_x -= displacement;
 }
 
