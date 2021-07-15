@@ -67,6 +67,7 @@ void	draw_iso_right(t_points *pnt, t_data *data, int *row, int *col)
 			* ((row_cent + col_cent + 1) * cos (M_PI / 6)) + 1080);
 	pnt->yf = (int)(data->s_fct
 			* (-pnt->zf + (col_cent + 1 - row_cent) * sin (M_PI / 6)) + 680);
+	rotation(pnt, data);
 	draw_line(pnt, data);
 }
 
@@ -87,6 +88,7 @@ void	draw_iso_top(t_points *pnt, t_data *data, int *row, int *col)
 			* ((row_cent + col_cent + 1) * cos (M_PI / 6)) + 1080);
 	pnt->yf = (int)(data->s_fct
 			* (-pnt->zf + (col_cent - row_cent - 1) * sin(M_PI / 6)) + 680);
+	rotation(pnt, data);
 	draw_line(pnt, data);
 }
 

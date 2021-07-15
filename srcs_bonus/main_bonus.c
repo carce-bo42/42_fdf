@@ -30,41 +30,45 @@ void	start_mlx(t_mlx *mlx, t_data *data)
 	data->img = mlx_new_image(mlx->mlx, 2160, 1360);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
 			&data->line_length, &data->endian);
+	data->trans_x = 0.0;
+	data->trans_y = 0.0;
+	data->zoom = 0.0;
+	data->rot_angle = 0.0;
 }
 
-int	key_hook(int keycode, t_mlx *mlx)
+void	create_new_image(t_mlx *mlx)
 {
-	if (keycode == 53)
-	{
-		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
-		exit(0);
-	}
-	return (0);
+	if (mlx->data->img)
+		mlx_destroy_image(mlx->mlx, mlx->data->img);
+	mlx->data->img = mlx_new_image(mlx->mlx, 2160, 1360);
+	mlx->data->addr = mlx_get_data_addr(mlx->data->img,
+			&mlx->data->bits_per_pixel,
+			&mlx->data->line_length, &mlx->data->endian);
 }
 
-int	destructor(t_mlx *mlx)
+void	full_draw(t_mlx *mlx)
 {
-	mlx_destroy_window(mlx->mlx, mlx->mlx_win);
-	exit(0);
-	return (0);
+	mlx->fd = open(mlx->file, O_RDONLY);
+	create_new_image(mlx);
+	draw_image(mlx->fd, mlx->data);
+	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->data->img, 0, 0);
+	close(mlx->fd);
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	data;
 	t_mlx	mlx;
-	int		fd;
 
 	if (argc != 2)
 		arg_error();
-	error_ctrl(argv[1], &data);
+	mlx.file = argv[1];
+	mlx.data = &data;
+	error_ctrl(mlx.file, &data);
 	start_mlx(&mlx, &data);
-	fd = open(argv[1], O_RDONLY);
-	draw_image(fd, &data);
-	mlx_put_image_to_window(mlx.mlx, mlx.mlx_win, data.img, 0, 0);
-	close(fd);
+	full_draw(&mlx);
 	mlx_key_hook(mlx.mlx_win, key_hook, &mlx);
-	mlx_hook(mlx.mlx_win, 17, 0, destructor, &mlx);
+	mlx_hook(mlx.mlx_win, 17, 0, destroy_and_exit, &mlx);
 	mlx_loop(mlx.mlx);
 	return (0);
 }

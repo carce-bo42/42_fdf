@@ -25,8 +25,10 @@ FILES_BONUS = bresenham_bonus \
 			 gradient_coloring_bonus \
 			 get_nbr_and_color_bonus \
 			 get_map_line_bonus \
+			 keycodes_bonus \
 			 main_bonus \
 			 drawer_bonus \
+			 rotation_bonus
 
 SRCS_DIR = ./srcs/
 SRCS_DIR_BONUS = ./srcs_bonus/

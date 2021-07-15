@@ -18,8 +18,11 @@
 
 typedef struct s_mlx
 {
-	void	*mlx;
-	void	*mlx_win;
+	void			*mlx;
+	void			*mlx_win;
+	char			*file;
+	int				fd;
+	struct s_data	*data;
 }				t_mlx;
 
 typedef struct s_data
@@ -32,8 +35,10 @@ typedef struct s_data
 	int			col;
 	int			row;
 	double		s_fct;
+	double		zoom;
 	double		trans_x;
-	double		trans_y;	
+	double		trans_y;
+	double		rot_angle;
 }				t_data;
 
 typedef struct s_points
@@ -104,4 +109,15 @@ long		ft_atol(char *str);
 int			get_color(char *str);
 int			get_pixel_color(t_draw *utils, t_points *pnt);
 int			check_rgb(char *str);
+/* BONUS RELLATED FUNCTIONS */
+
+# define A 0
+# define D 2
+# define ESC 53
+
+void		rotation(t_points *pnt, t_data *data);
+int			key_hook(int keycode, t_mlx *mlx);
+int			destroy_and_exit(t_mlx *mlx);
+void		rotate_and_draw(t_mlx *mlx, int keycode);
+void		full_draw(t_mlx *mlx);
 #endif
