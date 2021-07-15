@@ -27,32 +27,24 @@ void	start_mlx(t_mlx *mlx, t_data *data)
 {
 	mlx->mlx = mlx_init();
 	mlx->mlx_win = mlx_new_window(mlx->mlx, 2160, 1360, "FdF carce-bo");
-	data->img = mlx_new_image(mlx->mlx, 2160, 1360);
-	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel,
-			&data->line_length, &data->endian);
 	data->trans_x = 0.0;
 	data->trans_y = 0.0;
 	data->zoom = 0.0;
 	data->rot_angle = 0.0;
 }
 
-void	create_new_image(t_mlx *mlx)
-{
-	if (mlx->data->img)
-		mlx_destroy_image(mlx->mlx, mlx->data->img);
-	mlx->data->img = mlx_new_image(mlx->mlx, 2160, 1360);
-	mlx->data->addr = mlx_get_data_addr(mlx->data->img,
-			&mlx->data->bits_per_pixel,
-			&mlx->data->line_length, &mlx->data->endian);
-}
-
-void	full_draw(t_mlx *mlx)
+int	full_draw(t_mlx *mlx)
 {
 	mlx->fd = open(mlx->file, O_RDONLY);
-	create_new_image(mlx);
+	mlx->data->img = mlx_new_image(mlx->mlx, 2160, 1360);
+	mlx->data->addr = mlx_get_data_addr(mlx->data->img,
+			&mlx->data->bits_per_pixel, 
+			&mlx->data->line_length, &mlx->data->endian);
 	draw_image(mlx->fd, mlx->data);
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->data->img, 0, 0);
+	mlx_destroy_image(mlx->mlx, mlx->data->img);
 	close(mlx->fd);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -67,8 +59,9 @@ int	main(int argc, char **argv)
 	error_ctrl(mlx.file, &data);
 	start_mlx(&mlx, &data);
 	full_draw(&mlx);
-	mlx_hook(mlx.mlx_win, 2, (1L << 0), key_hook, &mlx);
+	mlx_hook(mlx.mlx_win, 2, 3, key_hook, &mlx);
 	mlx_hook(mlx.mlx_win, 17, (17L << 0), destroy_and_exit, &mlx);
+	mlx_loop_hook(mlx.mlx, full_draw, &mlx); 
 	mlx_loop(mlx.mlx);
 	return (0);
 }

@@ -118,6 +118,6 @@ int			check_rgb(char *str);
 void		rotation(t_points *pnt, t_data *data);
 int			key_hook(int keycode, t_mlx *mlx);
 int			destroy_and_exit(t_mlx *mlx);
-void		rotate_and_draw(t_mlx *mlx, int keycode);
-void		full_draw(t_mlx *mlx);
+void		adjust_rotation(t_mlx *mlx, int keycode);
+int			full_draw(t_mlx *mlx);
 #endif

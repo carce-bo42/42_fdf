@@ -5,8 +5,7 @@ int	key_hook(int keycode, t_mlx *mlx)
 	if (keycode == ESC)
 		destroy_and_exit(mlx);
 	if (keycode == A || keycode == D)
-		rotate_and_draw(mlx, keycode);
-	full_draw(mlx);
+		adjust_rotation(mlx, keycode);
 	return (0);
 }
 

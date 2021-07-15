@@ -1,6 +1,6 @@
 #include "fdf_bonus.h"
 
-void	rotate_and_draw(t_mlx *mlx, int keycode)
+void	adjust_rotation(t_mlx *mlx, int keycode)
 {
 	double	angle;
 	double	increment;
@@ -9,7 +9,7 @@ void	rotate_and_draw(t_mlx *mlx, int keycode)
 	if (keycode == A)
 		increment = -0.1;
 	angle = mlx->data->rot_angle;
-	if (angle <= 2 * M_PI && angle >= 2 * M_PI)
+	if (angle <= 2 * M_PI && angle >= -(2 * M_PI))
 		mlx->data->rot_angle += increment;
 	else
 		mlx->data->rot_angle = increment;
