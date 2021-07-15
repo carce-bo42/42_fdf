@@ -31,6 +31,7 @@ void	start_mlx(t_mlx *mlx, t_data *data)
 	data->trans_y = 0.0;
 	data->zoom = 0.0;
 	data->rot_angle = 0.0;
+	data->view_angle = M_PI / 6;
 }
 
 int	full_draw(t_mlx *mlx)

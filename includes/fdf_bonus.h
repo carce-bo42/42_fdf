@@ -39,6 +39,7 @@ typedef struct s_data
 	double		trans_x;
 	double		trans_y;
 	double		rot_angle;
+	double		view_angle;
 }				t_data;
 
 typedef struct s_points
@@ -121,6 +122,7 @@ int			check_rgb(char *str);
 # define RIGHT_ARROW 124
 # define DOWN_ARROW 125
 # define UP_ARROW 126
+# define KEY_V 9
 
 void		rotation(double *x, double *y, double angle);
 int			key_hook(int keycode, t_mlx *mlx);
@@ -130,4 +132,5 @@ void		adjust_rotation(t_mlx *mlx, int keycode);
 void		translate_x(t_mlx *mlx, int keycode);
 void		translate_y(t_mlx *mlx, int keycode);
 void		zoom_camera(t_mlx *mlx, int keycode);
+void		change_view(t_mlx *mlx);
 #endif

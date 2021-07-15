@@ -27,7 +27,7 @@ void	translate_x(t_mlx *mlx, int keycode)
 
 	more = 1;
 	less = 1;
-	displacement = 5.0;
+	displacement = 10.0;
 	if (mlx->data->trans_x > 2 * 1080)
 		more = 0;
 	if (mlx->data->trans_x < -2 * 1080)
@@ -45,8 +45,8 @@ void	translate_y(t_mlx *mlx, int keycode)
 	int		less;
 
 	more = 1;
-	less = 0;
-	displacement = 5.0;
+	less = 1;
+	displacement = 10.0;
 	if (mlx->data->trans_y > 2 * 680)
 		more = 0;
 	if (mlx->data->trans_y < -2 * 680)
