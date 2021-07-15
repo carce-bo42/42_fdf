@@ -109,6 +109,7 @@ long		ft_atol(char *str);
 int			get_color(char *str);
 int			get_pixel_color(t_draw *utils, t_points *pnt);
 int			check_rgb(char *str);
+
 /* BONUS RELLATED FUNCTIONS */
 
 # define KEY_A 0
@@ -124,8 +125,9 @@ int			check_rgb(char *str);
 void		rotation(double *x, double *y, double angle);
 int			key_hook(int keycode, t_mlx *mlx);
 int			destroy_and_exit(t_mlx *mlx);
-void		adjust_rotation(t_mlx *mlx, int keycode);
 int			full_draw(t_mlx *mlx);
+void		adjust_rotation(t_mlx *mlx, int keycode);
 void		translate_x(t_mlx *mlx, int keycode);
 void		translate_y(t_mlx *mlx, int keycode);
+void		zoom_camera(t_mlx *mlx, int keycode);
 #endif

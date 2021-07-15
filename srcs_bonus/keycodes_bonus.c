@@ -10,6 +10,8 @@ int	key_hook(int keycode, t_mlx *mlx)
 		translate_x(mlx, keycode);
 	if (keycode == UP_ARROW || keycode == DOWN_ARROW)
 		translate_y(mlx, keycode);
+	if (keycode == KEY_PLUS ||keycode == KEY_MINUS)
+		zoom_camera(mlx, keycode);
 	return (0);
 }
 

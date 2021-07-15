@@ -57,15 +57,17 @@ void	draw_iso_right(t_points *pnt, t_data *data, int *row, int *col)
 	double	row_cent;
 	double	col_cent;
 
-	row_cent = (double)*row - ((double)(data->row - 1) / 2.0);
-	col_cent = (double)*col - ((double)(data->col - 1) / 2.0);
+	row_cent = (1 + data->zoom) * ((double)*row - ((double)(data->row - 1) / 2.0));
+	col_cent = (1 + data->zoom) * ((double)*col - ((double)(data->col - 1) / 2.0));
+	pnt->zi = (1 + data->zoom) * (double)pnt->zi;
 	rotation(&row_cent, &col_cent, data->rot_angle); 
 	pnt->xi = (int)(data->s_fct
 			* ((row_cent + col_cent) * cos (M_PI / 6)) + 1080 + data->trans_x);
 	pnt->yi = (int)(data->s_fct
 			* (-pnt->zi + (col_cent - row_cent) * sin (M_PI / 6)) + 680 + data->trans_y);
-	row_cent = (double)*row - ((double)(data->row - 1) / 2.0);
-	col_cent = (double)(*col + 1) - ((double)(data->col - 1) / 2.0);
+	row_cent = (1 + data->zoom) * ((double)*row - ((double)(data->row - 1) / 2.0));
+	col_cent = (1 + data->zoom) * ((double)(*col + 1) - ((double)(data->col - 1) / 2.0));
+	pnt->zf = (1 + data->zoom) * (double)pnt->zf;
 	rotation(&row_cent, &col_cent, data->rot_angle); 
 	pnt->xf = (int)(data->s_fct
 			* ((row_cent + col_cent) * cos (M_PI / 6)) + 1080 + data->trans_x);
@@ -81,16 +83,18 @@ void	draw_iso_top(t_points *pnt, t_data *data, int *row, int *col)
 	double	row_cent;
 	double	col_cent;
 
-	row_cent = (double)*row - ((double)(data->row - 1) / 2.0);
-	col_cent = (double)*col - ((double)(data->col - 1) / 2.0);
+	row_cent = (1 + data->zoom) * ((double)*row - ((double)(data->row - 1) / 2.0));
+	col_cent = (1 + data->zoom) * ((double)*col - ((double)(data->col - 1) / 2.0));
+	pnt->zi = (1 + data->zoom) * (double)pnt->zi;
 	rotation(&row_cent, &col_cent, data->rot_angle); 
 	pnt->xi = (int)(data->s_fct
 			* ((row_cent + col_cent) * cos (M_PI / 6)) + 1080 + data->trans_x);
 	pnt->yi = (int)(data->s_fct
 			* (-pnt->zi + (col_cent - row_cent) * sin(M_PI / 6)) + 680 + data->trans_y);
-	row_cent = (double)(*row + 1) - ((double)(data->row - 1) / 2.0);
-	col_cent = (double)*col - ((double)(data->col - 1) / 2.0);
-	rotation(&row_cent, &col_cent, data->rot_angle); 
+	row_cent = (1 + data->zoom) * ((double)(*row + 1) - ((double)(data->row - 1) / 2.0));
+	col_cent = (1 + data->zoom) * ((double)*col - ((double)(data->col - 1) / 2.0));
+	pnt->zf = (1 + data->zoom) * (double)pnt->zf;
+	rotation(&row_cent, &col_cent, data->rot_angle);
 	pnt->xf = (int)(data->s_fct
 			* ((row_cent + col_cent) * cos (M_PI / 6)) + 1080 + data->trans_x);
 	pnt->yf = (int)(data->s_fct

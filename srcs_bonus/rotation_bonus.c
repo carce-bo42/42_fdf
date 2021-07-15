@@ -1,28 +1,59 @@
 #include "fdf_bonus.h"
 
+void	zoom_camera(t_mlx *mlx, int keycode)
+{
+	double	added_zoom;
+	int		more;
+	int		less;
+
+	more = 1;
+	less = 1;
+	added_zoom = 0.05;
+	if (mlx->data->zoom > 3.0)
+		more = 0;
+	if (mlx->data->zoom < -3.0)
+		less = 0;
+	if (keycode == KEY_PLUS && more == 1)
+		mlx->data->zoom += added_zoom;
+	if (keycode == KEY_MINUS && less == 1)
+		mlx->data->zoom -= added_zoom;
+}
+
 void	translate_x(t_mlx *mlx, int keycode)
 {
 	double	displacement;
+	int		more;
+	int		less;
 
+	more = 1;
+	less = 1;
 	displacement = 5.0;
-	if (abs((int)mlx->data->trans_x) > 2 * 1080)
-		displacement = 0;
-	if (keycode == RIGHT_ARROW)
+	if (mlx->data->trans_x > 2 * 1080)
+		more = 0;
+	if (mlx->data->trans_x < -2 * 1080)
+		less = 0;
+	if (keycode == RIGHT_ARROW && more == 1)
 		mlx->data->trans_x += displacement;
-	else
+	else (keycode == LLEFT_ARROW && less == 1)
 		mlx->data->trans_x -= displacement;
 }
 
 void	translate_y(t_mlx *mlx, int keycode)
 {
 	double	displacement;
+	int		more;
+	int		less;
 
+	more = 1;
+	less = 0;
 	displacement = 5.0;
-	if (abs((int)mlx->data->trans_y) > 2 * 680)
-		displacement = 0;
-	if (keycode == DOWN_ARROW)
+	if (mlx->data->trans_y > 2 * 680)
+		more = 0;
+	if (mlx->data->trans_y < -2 * 680)
+		less = 0;
+	if (keycode == DOWN_ARROW && more == 1)
 		mlx->data->trans_y += displacement;
-	else
+	if (keycode == UP_ARROW && less == 1)
 		mlx->data->trans_y -= displacement;
 }
 
