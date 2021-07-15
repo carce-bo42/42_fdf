@@ -2,9 +2,9 @@
 
 int	key_hook(int keycode, t_mlx *mlx)
 {
-	if (keycode == ESC)
+	if (keycode == KEY_ESC)
 		destroy_and_exit(mlx);
-	if (keycode == A || keycode == D)
+	if (keycode == KEY_A || keycode == KEY_D)
 		adjust_rotation(mlx, keycode);
 	return (0);
 }
