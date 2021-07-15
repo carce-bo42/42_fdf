@@ -11,7 +11,7 @@ void	zoom_camera(t_mlx *mlx, int keycode)
 	added_zoom = 0.05;
 	if (mlx->data->zoom > 3.0)
 		more = 0;
-	if (mlx->data->zoom < -3.0)
+	if (mlx->data->zoom < -0.9)
 		less = 0;
 	if (keycode == KEY_PLUS && more == 1)
 		mlx->data->zoom += added_zoom;

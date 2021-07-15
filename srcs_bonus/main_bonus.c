@@ -38,7 +38,7 @@ int	full_draw(t_mlx *mlx)
 	mlx->fd = open(mlx->file, O_RDONLY);
 	mlx->data->img = mlx_new_image(mlx->mlx, 2160, 1360);
 	mlx->data->addr = mlx_get_data_addr(mlx->data->img,
-			&mlx->data->bits_per_pixel, 
+			&mlx->data->bits_per_pixel,
 			&mlx->data->line_length, &mlx->data->endian);
 	draw_image(mlx->fd, mlx->data);
 	mlx_put_image_to_window(mlx->mlx, mlx->mlx_win, mlx->data->img, 0, 0);
@@ -61,7 +61,7 @@ int	main(int argc, char **argv)
 	full_draw(&mlx);
 	mlx_hook(mlx.mlx_win, 2, 3, key_hook, &mlx);
 	mlx_hook(mlx.mlx_win, 17, (17L << 0), destroy_and_exit, &mlx);
-	mlx_loop_hook(mlx.mlx, full_draw, &mlx); 
+	mlx_loop_hook(mlx.mlx, full_draw, &mlx);
 	mlx_loop(mlx.mlx);
 	return (0);
 }
