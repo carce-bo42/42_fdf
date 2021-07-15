@@ -111,9 +111,15 @@ int			get_pixel_color(t_draw *utils, t_points *pnt);
 int			check_rgb(char *str);
 /* BONUS RELLATED FUNCTIONS */
 
-# define A 0
-# define D 2
-# define ESC 53
+# define KEY_A 0
+# define KEY_D 2
+# define KEY_PLUS 30
+# define KEY_MINUS 44
+# define KEY_ESC 53
+# define LEFT_ARROW 123
+# define RIGHT_ARROW 124
+# define DOWN_ARROW 125
+# define UP_ARROW 126
 
 void		rotation(double *x, double *y, double angle);
 int			key_hook(int keycode, t_mlx *mlx);
