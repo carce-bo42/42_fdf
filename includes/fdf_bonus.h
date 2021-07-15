@@ -45,10 +45,10 @@ typedef struct s_points
 {
 	int		xi;
 	int		yi;
-	int		zi;
+	double	zi;
 	int		xf;
 	int		yf;
-	int		zf;
+	double	zf;
 	int		clr_c;
 	int		clr_f;
 }				t_points;
