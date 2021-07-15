@@ -15,21 +15,13 @@ void	adjust_rotation(t_mlx *mlx, int keycode)
 		mlx->data->rot_angle = increment;
 }
 
-void	rotation(t_points *pnt, t_data *data)
+void	rotation(double *x, double *y, double angle)
 {
-	int	aux_x;
-	int	aux_y;
+	double	aux_x;
+	double	aux_y;
 
-	aux_x = pnt->xi;
-	aux_y = pnt->yi;
-	pnt->xi = aux_x * cos(data->rot_angle)
-		- aux_y * sin(data->rot_angle);
-	pnt->yi = aux_x * sin(data->rot_angle)
-		+ aux_y * cos(data->rot_angle);
-	aux_x = pnt->xf;
-	aux_y = pnt->yf;
-	pnt->xf = aux_x * cos(data->rot_angle)
-		- aux_y * sin(data->rot_angle);
-	pnt->yf = aux_x * sin(data->rot_angle)
-		+ aux_y * cos(data->rot_angle);
+	aux_x = *x;
+	aux_y = *y;
+	*x = aux_x * cos(angle) + aux_y * sin(angle);
+	*y = aux_x * sin(angle) - aux_y * cos(angle);
 }

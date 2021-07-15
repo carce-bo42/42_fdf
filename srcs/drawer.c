@@ -74,8 +74,8 @@ void	draw_iso_right(t_points *pnt, t_data *data, int *row, int *col)
  * (row, col) and (row + 1, col). */
 void	draw_iso_top(t_points *pnt, t_data *data, int *row, int *col)
 {
-	int	row_cent;
-	int	col_cent;
+	double	row_cent;
+	double	col_cent;
 
 	row_cent = *row - (data->row / 2);
 	col_cent = *col - (data->col / 2);

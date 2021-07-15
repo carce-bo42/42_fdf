@@ -115,7 +115,7 @@ int			check_rgb(char *str);
 # define D 2
 # define ESC 53
 
-void		rotation(t_points *pnt, t_data *data);
+void		rotation(double *x, double *y, double angle);
 int			key_hook(int keycode, t_mlx *mlx);
 int			destroy_and_exit(t_mlx *mlx);
 void		adjust_rotation(t_mlx *mlx, int keycode);
