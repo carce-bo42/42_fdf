@@ -13,7 +13,6 @@ void	rotate_and_draw(t_mlx *mlx, int keycode)
 		mlx->data->rot_angle += increment;
 	else
 		mlx->data->rot_angle = increment;
-	full_draw(mlx);
 }
 
 void	rotation(t_points *pnt, t_data *data)
@@ -24,13 +23,13 @@ void	rotation(t_points *pnt, t_data *data)
 	aux_x = pnt->xi;
 	aux_y = pnt->yi;
 	pnt->xi = aux_x * cos(data->rot_angle)
-		+ aux_y * sin(data->rot_angle);
+		- aux_y * sin(data->rot_angle);
 	pnt->yi = aux_x * sin(data->rot_angle)
-		- aux_y * cos(data->rot_angle);
+		+ aux_y * cos(data->rot_angle);
 	aux_x = pnt->xf;
 	aux_y = pnt->yf;
 	pnt->xf = aux_x * cos(data->rot_angle)
-		+ aux_y * sin(data->rot_angle);
+		- aux_y * sin(data->rot_angle);
 	pnt->yf = aux_x * sin(data->rot_angle)
-		- aux_y * cos(data->rot_angle);
+		+ aux_y * cos(data->rot_angle);
 }

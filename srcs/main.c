@@ -36,6 +36,7 @@ int	key_hook(int keycode, t_mlx *mlx)
 {
 	if (keycode == 53)
 	{
+		mlx_clear_window(mlx->mlx, mlx->mlx_win);
 		mlx_destroy_window(mlx->mlx, mlx->mlx_win);
 		exit(0);
 	}

@@ -67,8 +67,8 @@ int	main(int argc, char **argv)
 	error_ctrl(mlx.file, &data);
 	start_mlx(&mlx, &data);
 	full_draw(&mlx);
-	mlx_key_hook(mlx.mlx_win, key_hook, &mlx);
-	mlx_hook(mlx.mlx_win, 17, 0, destroy_and_exit, &mlx);
+	mlx_hook(mlx.mlx_win, 2, (1L << 0), key_hook, &mlx);
+	mlx_hook(mlx.mlx_win, 17, (17L << 0), destroy_and_exit, &mlx);
 	mlx_loop(mlx.mlx);
 	return (0);
 }
