@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	init_row_matrix(int columns, t_mat *row_mats)
 {

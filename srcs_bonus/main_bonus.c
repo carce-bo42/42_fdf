@@ -1,4 +1,4 @@
-#include "fdf.h"
+#include "fdf_bonus.h"
 
 void	give_scale_factor(t_data *data)
 {
