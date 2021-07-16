@@ -50,10 +50,10 @@ MV := mv -f
 RM := rm -f
 
 %.o: %.c
-	$(CC)  $(CFLAGS) -c $< -I $(INC_DIR)  -o $@ -fsanitize=address
+	$(CC)  $(CFLAGS) -c $< -I $(INC_DIR)  -o $@ #-fsanitize=address
 
 $(NAME): $(LIBFT_DIR)$(LIBFT_NAME) $(MLX_DIR)$(MLX_NAME) $(GNL_DIR)$(GNL_NAME) $(OBJS)
-	$(CC) -o $(NAME)  $^ -I $(INC_DIR) -framework OPENGL -framework Appkit -lm -fsanitize=address
+	$(CC) -o $(NAME)  $^ -I $(INC_DIR) -framework OPENGL -framework Appkit -lm #-fsanitize=address
 
 $(NAME_BONUS): $(LIBFT_DIR)$(LIBFT_NAME) $(MLX_DIR)$(MLX_NAME) $(GNL_DIR)$(GNL_NAME) $(OBJS_BONUS)
 	$(CC) -o $(NAME_BONUS)  $^ -I $(INC_DIR) -framework OPENGL -framework Appkit -lm -fsanitize=address

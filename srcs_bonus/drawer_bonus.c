@@ -61,8 +61,7 @@ void	draw_iso_right(t_points *pnt, t_data *data, int *row, int *col)
 		* ((double)*row - ((double)(data->row - 1) / 2.0));
 	col_cent = (1 + data->zoom)
 		* ((double)*col - ((double)(data->col - 1) / 2.0));
-	pnt->zi = (1 + data->zoom) * pnt->zi;
-	rotation(&row_cent, &col_cent, data->rot_angle);
+	rotation(&row_cent, &col_cent, &pnt->zi, data);
 	pnt->xi = (int)(data->s_fct * ((row_cent + col_cent)
 				* cos (data->view_angle)) + 1080 + data->trans_x);
 	pnt->yi = (int)(data->s_fct * (-pnt->zi + (col_cent - row_cent)
@@ -71,8 +70,7 @@ void	draw_iso_right(t_points *pnt, t_data *data, int *row, int *col)
 		* ((double)*row - ((double)(data->row - 1) / 2.0));
 	col_cent = (1 + data->zoom)
 		* ((double)(*col + 1) - ((double)(data->col - 1) / 2.0));
-	pnt->zf = (1 + data->zoom) * pnt->zf;
-	rotation(&row_cent, &col_cent, data->rot_angle);
+	rotation(&row_cent, &col_cent, &pnt->zf, data);
 	pnt->xf = (int)(data->s_fct * ((row_cent + col_cent)
 				* cos (data->view_angle)) + 1080 + data->trans_x);
 	pnt->yf = (int)(data->s_fct * (-pnt->zf + (col_cent - row_cent)
@@ -91,8 +89,7 @@ void	draw_iso_top(t_points *pnt, t_data *data, int *row, int *col)
 		* ((double)*row - ((double)(data->row - 1) / 2.0));
 	col_cent = (1 + data->zoom)
 		* ((double)*col - ((double)(data->col - 1) / 2.0));
-	pnt->zi = (1 + data->zoom) * pnt->zi;
-	rotation(&row_cent, &col_cent, data->rot_angle);
+	rotation(&row_cent, &col_cent, &pnt->zi, data);
 	pnt->xi = (int)(data->s_fct * ((row_cent + col_cent)
 				* cos (data->view_angle)) + 1080 + data->trans_x);
 	pnt->yi = (int)(data->s_fct * (-pnt->zi + (col_cent - row_cent)
@@ -101,8 +98,7 @@ void	draw_iso_top(t_points *pnt, t_data *data, int *row, int *col)
 		* ((double)(*row + 1) - ((double)(data->row - 1) / 2.0));
 	col_cent = (1 + data->zoom)
 		* ((double)*col - ((double)(data->col - 1) / 2.0));
-	pnt->zf = (1 + data->zoom) * pnt->zf;
-	rotation(&row_cent, &col_cent, data->rot_angle);
+	rotation(&row_cent, &col_cent, &pnt->zf, data);
 	pnt->xf = (int)(data->s_fct * ((row_cent + col_cent)
 				* cos (data->view_angle)) + 1080 + data->trans_x);
 	pnt->yf = (int)(data->s_fct * (-pnt->zf + (col_cent - row_cent)

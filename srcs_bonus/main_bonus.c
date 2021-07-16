@@ -32,6 +32,7 @@ void	start_mlx(t_mlx *mlx, t_data *data)
 	data->zoom = 0.0;
 	data->rot_angle = 0.0;
 	data->view_angle = M_PI / 6;
+	data->z_scale_factor = 0;
 }
 
 int	full_draw(t_mlx *mlx)
@@ -62,7 +63,6 @@ int	main(int argc, char **argv)
 	full_draw(&mlx);
 	mlx_hook(mlx.mlx_win, 2, 3, key_hook, &mlx);
 	mlx_hook(mlx.mlx_win, 17, (17L << 0), destroy_and_exit, &mlx);
-	mlx_loop_hook(mlx.mlx, full_draw, &mlx);
 	mlx_loop(mlx.mlx);
 	return (0);
 }

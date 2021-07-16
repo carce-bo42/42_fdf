@@ -72,13 +72,15 @@ void	adjust_rotation(t_mlx *mlx, int keycode)
 		mlx->data->rot_angle = increment;
 }
 
-void	rotation(double *x, double *y, double angle)
+void	rotation(double *x, double *y, double *z, t_data *data)
 {
 	double	aux_x;
 	double	aux_y;
 
 	aux_x = *x;
 	aux_y = *y;
-	*x = aux_x * cos(angle) + aux_y * sin(angle);
-	*y = aux_x * sin(angle) - aux_y * cos(angle);
+	*x = aux_x * cos(data->rot_angle) + aux_y * sin(data->rot_angle);
+	*y = aux_x * sin(data->rot_angle) - aux_y * cos(data->rot_angle);
+	*z = (1 + data->zoom) * (pow(cos(data->view_angle - M_PI / 6), 10)
+			* (*z) * (1 + data->z_scale_factor));
 }
