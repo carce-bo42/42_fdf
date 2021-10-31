@@ -5,7 +5,7 @@ int	ft_numberlen(char *str)
 	int	len;
 
 	len = 0;
-	if (*str == '+' | *str == '-')
+	if (*str == '+' || *str == '-')
 		str++;
 	while (*str == '0')
 		str++;
